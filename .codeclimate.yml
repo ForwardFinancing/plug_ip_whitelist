@@ -1,0 +1,30 @@
+prepare:
+  fetch:
+    - url: "https://raw.githubusercontent.com/ForwardFinancing/code_styles/master/credo.exs"
+      path: ".credo.exs"
+
+    - url: "https://raw.githubusercontent.com/ForwardFinancing/code_styles/master/scss-lint.yml"
+      path: ".scss-lint.yml"
+
+    - url: "https://raw.githubusercontent.com/ForwardFinancing/code_styles/master/stylelintrc"
+      path: ".stylelintrc"
+engines:
+  credo:
+    enabled: true
+    channel: beta
+  fixme:
+    enabled: true
+  scss-lint:
+    enabled: true
+  stylelint:
+    enabled: true
+ratings:
+  paths:
+  - "**.ex"
+  - "**.exs"
+exclude_paths:
+  - test/
+  - priv/static
+  - web/static
+  - lib/mix/tasks
+  - lib/fake

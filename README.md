@@ -1,6 +1,10 @@
 # Plug.IpWhitelist
 
-**TODO: Add description**
+[![Maintainability](https://api.codeclimate.com/v1/badges/78d5200b37d13ff2da1d/maintainability)](https://codeclimate.com/github/ForwardFinancing/plug_ip_whitelist/maintainability)
+
+[![Test Coverage](https://api.codeclimate.com/v1/badges/78d5200b37d13ff2da1d/test_coverage)](https://codeclimate.com/github/ForwardFinancing/plug_ip_whitelist/test_coverage)
+
+[![Build Status](https://travis-ci.org/ForwardFinancing/plug_ip_whitelist.svg?branch=master)](https://travis-ci.org/ForwardFinancing/plug_ip_whitelist)
 
 ## Installation
 
