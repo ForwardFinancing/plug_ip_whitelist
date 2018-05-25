@@ -22,14 +22,16 @@ use Mix.Config
 #
 
 # Run format check before committing
-config :pre_commit,
-  commands: [
-    # Runs mix format, checking that formatting has been run without actually
-    #   changing any files
-    "format --check-formatted"
-  ],
-  # Show output
-  verbose: true
+if Mix.env() == :dev do
+  config :pre_commit,
+    commands: [
+      # Runs mix format, checking that formatting has been run without actually
+      #   changing any files
+      "format --check-formatted"
+    ],
+    # Show output
+    verbose: true
+end
 
 # It is also possible to import configuration files, relative to this
 # directory. For example, you can emulate configuration per environment

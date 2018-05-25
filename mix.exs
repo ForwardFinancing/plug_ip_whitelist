@@ -14,8 +14,12 @@ defmodule Plug.IpWhitelist.MixProject do
         "coveralls.detail": :test,
         "coveralls.post": :test,
         "coveralls.html": :test,
-        "coveralls.json": :test
-      ]
+        "coveralls.json": :test,
+        test: :test
+      ],
+      source_url: "https://github.com/ForwardFinancing/plug_ip_whitelist",
+      homepage_url: "https://github.com/ForwardFinancing/plug_ip_whitelist",
+      package: package()
     ]
   end
 
@@ -29,7 +33,21 @@ defmodule Plug.IpWhitelist.MixProject do
     [
       {:pre_commit, "~> 0.2.4", only: :dev},
       {:plug, "~> 1.5"},
-      {:excoveralls, "~> 0.8", only: :test}
+      {:excoveralls, "~> 0.8", only: :test},
+      {:ex_doc, ">= 0.0.0", only: :dev}
+    ]
+  end
+
+  defp package do
+    [
+      maintainers: ["Zach Cotter", "Forward Financing"],
+      licenses: ["MIT"],
+      links: %{
+        "GitHub" => "https://github.com/ForwardFinancing/plug_ip_whitelist",
+        "Documentation" => "https://hexdocs.pm/plug_ip_whitelist"
+      },
+      description:
+        "Plug to Enforce IP Whitelisting in Elixir/Phoenix applications"
     ]
   end
 end
