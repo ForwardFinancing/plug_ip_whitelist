@@ -62,7 +62,7 @@ defmodule Plug.IpWhitelist.IpWhitelistEnforcer do
   def call(conn, options) do
     ip_whitelist = Keyword.fetch!(options, :ip_whitelist)
     # Do any of the whitelisted IP ranges contain the request ip?
-    if Enum.any?(ip_whitelist, &ip_in_range?(&1, conn.remote_ip)) do
+    if is_whitelisted?(conn, ip_whitelist) do
       # If the request IP was in the range, return the conn unchanged to
       #   continue through the plug pipeline
       conn
@@ -80,6 +80,15 @@ defmodule Plug.IpWhitelist.IpWhitelistEnforcer do
       )
       |> halt()
     end
+  end
+
+  @doc """
+  Returns true or false indicating whether the given request's remote ip is on
+  the given whitelist
+  """
+  @spec is_whitelisted?(Plug.Conn.t(), [IpWhitelist.ip_range(), ...]) :: boolean
+  def is_whitelisted?(conn, ip_whitelist) do
+    Enum.any?(ip_whitelist, &ip_in_range?(&1, conn.remote_ip))
   end
 
   # If there is no ip than it is not in the range
