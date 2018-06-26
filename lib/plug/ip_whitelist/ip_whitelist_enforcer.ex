@@ -87,9 +87,25 @@ defmodule Plug.IpWhitelist.IpWhitelistEnforcer do
   the given whitelist
   """
   @spec is_whitelisted?(Plug.Conn.t(), [IpWhitelist.ip_range(), ...]) :: boolean
-  def is_whitelisted?(conn, ip_whitelist) do
-    Enum.any?(ip_whitelist, &ip_in_range?(&1, conn.remote_ip))
+  def is_whitelisted?(%{remote_ip: remote_ip} = _conn, ip_whitelist) do
+    is_whitelisted?(remote_ip, ip_whitelist)
   end
+
+  @doc """
+  Returns true or false indicating whether the given remote ip is on the given
+  whitelist
+  """
+  @spec is_whitelisted?(IpWhitelist.ip(), [IpWhitelist.ip_range(), ...]) ::
+          boolean
+  def is_whitelisted?({_, _, _, _} = remote_ip, ip_whitelist) do
+    Enum.any?(ip_whitelist, &ip_in_range?(&1, remote_ip))
+  end
+
+  @doc """
+  Returns false when there is no given remote ip
+  """
+  @spec is_whitelisted?(nil, [IpWhitelist.ip_range(), ...]) :: boolean
+  def is_whitelisted?(nil, _ip_whitelist), do: false
 
   # If there is no ip than it is not in the range
   @spec ip_in_range?(any, nil) :: false

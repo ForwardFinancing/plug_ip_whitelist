@@ -37,6 +37,26 @@ plug Plug.IpWhitelist.IpWhitelistEnforcer, [
 ### IMPORTANT: Set IP Address via `remote_ip`
 Phoenix/Plug.Conn do not provide out of the box support for request ip address. IpWhitelistEnforcer assumes that something further up the plug chain has already set the `remote_ip` attribute on the connection to be the request ip address. If your application runs on Heroku, see the section on Usage with Heroku for the built-in functionality provided
 
+### Usage outside of a Plug
+
+Sometimes you just want a boolean indicating whether or not an IP address is on
+the whitelist.
+
+```elixir
+ip_whitelist = [
+    {{1, 1, 1, 1}, {1, 1, 1, 2}},
+    {{1, 2, 3, 4}, {5, 6, 7, 8}}
+]
+
+# You can pass in a Plug.Conn to see if it's remote ip is whitelisted:
+Plug.IpWhitelist.IpWhitelistEnforcer.is_whitelisted?(some_conn, ip_whitelist)
+# => true/false
+
+# Or you can pass in an IP address directly:
+Plug.IpWhitelist.IpWhitelistEnforcer.is_whitelisted?({1, 1, 1, 1}, ip_whitelist)
+# => true
+```
+
 ### Options
 
 `ip_whitelist` (required): A list of ip range tuples
